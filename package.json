@@ -1,0 +1,26 @@
+{
+  "name": "img-rekog",
+  "version": "1.0.0",
+  "description": "image recognition using aws rekog service",
+  "main": "app.js",
+  "dependencies": {
+    "aws-sdk": "^2.485.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajyounguk/img-rekog.git"
+  },
+  "author": "Andrew Young",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajyounguk/img-rekog/issues"
+  },
+  "homepage": "https://github.com/ajyounguk/img-rekog#readme",
+  "keywords": []
+}

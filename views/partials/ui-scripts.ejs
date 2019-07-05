@@ -1,0 +1,32 @@
+<!-- navbar buttons control  -->
+<!-- toggles div sections for the forms and the buttons) -->
+<script>
+    function activateUI(activateDiv, activateButton) {
+
+        // enable divs
+        var i;
+
+        var divs = document.getElementsByClassName("menu-div");
+        var buttons = document.getElementsByClassName("menu-button");
+
+        // reset/disable all divs
+        for (i = 0; i < divs.length; i++) {
+
+            if (divs[i] == document.getElementById(activateDiv)) {
+                divs[i].style.display = "block";
+            } else {
+                divs[i].style.display = "none";
+            }
+        }
+
+
+        // disable all buttons
+        for (i = 0; i < buttons.length; i++) {
+            if (buttons[i] == document.getElementById(activateButton)) {
+                buttons[i].style.background = "rgb(0, 9, 12)";
+            } else {
+                buttons[i].style.background = "";
+            }
+        }
+    }
+</script>

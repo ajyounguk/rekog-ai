@@ -1,0 +1,10 @@
+<div id="image-display" class="padded">
+    <% if (!ui.supressUi) { %>
+    <% if (ui.data.filename) { %>
+    <label>Image:</label>
+    <img src="<%= ui.data.filename %>" height="250">
+    <% } else { %>
+    <img src= "blank.png" height="250">
+    <% } %>
+    <% } %>
+</div>
