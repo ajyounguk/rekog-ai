@@ -7,8 +7,9 @@ See https://aws.amazon.com/rekognition/ for details
 
 ## Screenshots
 ![Alt text](/screenshots/rekog4.png?raw=true)
-![Alt text](/screenshots/rekog1.png?raw=true)
 ![Alt text](/screenshots/rekog5.png?raw=true)
+![Alt text](/screenshots/rekog1.png?raw=true)
+
 
 
 ## Contents:
