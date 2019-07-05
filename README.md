@@ -4,13 +4,13 @@
 A Node.js web client that excercises the AWS image recognition AI (using the rekognition service)
 
 ## Screenshots
-![Alt text](/screenshots/rekog4.png?raw=true)
-![Alt text](/screenshots/rekog3.png?raw=true)
-![Alt text](/screenshots/rekog2.png?raw=true)
 ![Alt text](/screenshots/rekog1.png?raw=true)
+![Alt text](/screenshots/rekog5.png?raw=true)
+![Alt text](/screenshots/rekog4.png?raw=true)
+
 
 ## Contains:
-- app.js = main app & webserver. Launch this
+- app.js = main app & webserver. Launch this.
 
 - /config = example aws creds config file and example endpoint override (optional) config file
 - /public = stylesheet
