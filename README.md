@@ -11,19 +11,25 @@ A Node.js web client that excercises the AWS image recognition AI (using the rek
 
 ## Contains:
 - app.js = main app & webserver. Launch this
-- /controllers = HTTP routes and rekognition API functionality 
+
 - /config = example aws creds config file and example endpoint override (optional) config file
 - /public = stylesheet
-- views = main index.ejs and UI partials 
+- /images = sample images (put your own images into this directory)
+- /models = ui data model
+- /views = main index.ejs and UI partials 
+- /controllers = HTTP routes and rekognition API functionality 
+- /screenshots - app screenshots for readme
+
 
 ### Rekog Functionality:
 - Upload photo and get recognised text labes (description)
 
 
 ### Todo:
-- text recognition
-- celebrity... recognition
-- (near) real time recognition
+- video recognition
+- webcam screenshots
+- batch recognition and classification
+- (near) real time recognition 
 
 ## Installation overview
 install Node.js: https://nodejs.org/en/
