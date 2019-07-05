@@ -39,20 +39,21 @@ See https://aws.amazon.com/rekognition/ for details
 
 
 ## Installation overview
-1. install Node.js: https://nodejs.org/en/
+1. install Node.js:
+ https://nodejs.org/en/
 
-2. clone the repo:
+1. clone the repo:
 ```
 git clone https://github.com/ajyounguk/img-rekog
 ```
 
-3. install node modules/dependencies:
+1. install node modules/dependencies:
 ```
 cd img-rekog
 npm install
 ```
 
-4. create AWS credentials and add them to the configuration file in the /config directory
+1. create AWS credentials and add them to the configuration file in the /config directory
 You will need a AWS IAM user configured with AmazonRekognitionFullAccess permissions
 
 ** please take care and don't commit your creds back to git if you clone this repo **
