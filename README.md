@@ -4,9 +4,9 @@
 A Node.js web client that excercises the AWS image recognition AI (using the rekognition service)
 
 ## Screenshots
-![Alt text](/screenshots/rekog1.png?raw=true)
 ![Alt text](/screenshots/rekog5.png?raw=true)
 ![Alt text](/screenshots/rekog4.png?raw=true)
+![Alt text](/screenshots/rekog1.png?raw=true)
 
 
 ## Contains:
