@@ -39,43 +39,42 @@ See https://aws.amazon.com/rekognition/ for details
 
 
 ## Installation overview
-1. install Node.js:
 
+#### 1. install Node.js
 https://nodejs.org/en/
 
-2. clone the repo:
+#### 2. clone the repo
 ```
 git clone https://github.com/ajyounguk/img-rekog
 ```
 
-3. install node modules/dependencies:
+#### 3. install project modules/dependencies
 ```
 cd img-rekog
 npm install
 ```
 
-4. create AWS credentials and add them to the configuration file in the /config directory
-You will need a AWS IAM user configured with AmazonRekognitionFullAccess permissions
-
-** please take care and don't commit your creds back to git if you clone this repo **
+#### 4.create AWS credentials and add them to the configuration file in the /config directory
+- You will need a AWS IAM user configured with AmazonRekognitionFullAccess permissions
+- **please take care and don't commit your creds back to git if you clone this repo**
 ```
 cd config
 cp aws-config-sample.json aws-config.json
 ```
-edit the aws-config.jon file and add your IAM Access key (for example, AKIAIOSFODNN7EXAMPLE) and the secret access key into the config file
+- edit the aws-config.jon file and add your IAM Access key (for example, AKIAIOSFODNN7EXAMPLE) and the secret access key into the config file
 
 
 ## Images to be analysed
-put them in the /images directory
-they must be under 5mb in jpg or png format
+- put them in the /images directory
+- they must be under 5mb in jpg or png format
 
 
 ## How to run it
-run the webserver:
+- run the webserver:
 ```
 node app.js
 ```
 
-point your browser at the local/remoteIP port 3000 to load the HTML form
+- point your browser at the local/remoteIP port 3000 to load the HTML form
 e.g http://127.0.0.1:3000/
 
