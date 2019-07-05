@@ -40,7 +40,8 @@ See https://aws.amazon.com/rekognition/ for details
 
 ## Installation overview
 1. install Node.js:
- https://nodejs.org/en/
+
+https://nodejs.org/en/
 
 1. clone the repo:
 ```
