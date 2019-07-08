@@ -71,6 +71,7 @@ module.exports = function (app) {
 
 		}
 
+		// detect image labels
 		var detectLabels = function (buffer) {
 			return new Promise(function (resolve, reject) {
 
@@ -99,6 +100,7 @@ module.exports = function (app) {
 
 		}
 
+		// detect image text
 		var detectText = function (buffer) {
 			return new Promise(function (resolve, reject) {
 
@@ -125,7 +127,7 @@ module.exports = function (app) {
 			})
 		}
 
-
+		// detect image face description and sentiment analysis data
 		var detectFace = function (buffer) {
 			return new Promise(function (resolve, reject) {
 
@@ -179,10 +181,10 @@ module.exports = function (app) {
 		// main controller logic - load the file, then call recog APIs in parallel, collect promises and render screen
 
 		// loadimage - on promise resolved,  call detectlabels and detecttext functions
-		loadImage().then(function (buffer) {
+		loadImage().then(function resolveLoadImage(buffer) {
 
 				// execute detectLabels and detectText in parallel then assign UI vars and render results
-				Promise.all([detectLabels(buffer), detectText(buffer), detectFace(buffer)]).then(function (arr) {
+				Promise.all([detectLabels(buffer), detectText(buffer), detectFace(buffer)]).then(function resolveAll(arr) {
 						// all promises resolved
 						ui.data.rekogResultLabel = arr[0]
 						ui.data.rekogResultText = arr[1]
@@ -193,7 +195,7 @@ module.exports = function (app) {
 
 					},
 					// promise error - from either detectLabels, detectText
-					function (err) {
+					function rejectAll(err) {
 						ui.data.rekogResultLabel = err
 						res.render('./index.ejs', {
 							ui: ui
@@ -201,7 +203,7 @@ module.exports = function (app) {
 					})
 
 			}, // loadmimage promise err
-			function (err) {
+			function rejectLoadImage(err) {
 				ui.data.rekogResultLabel = err
 				res.render('./index.ejs', {
 					ui: ui

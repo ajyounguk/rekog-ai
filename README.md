@@ -1,85 +1,77 @@
-# AWS Rekognition (Image Recognition) Web App
+# Rekog-AI - Image Recognition
 
 ## What is this?
+A web app that allows you to use Amazon's rekognition AI service to analyse images. 
 
-A Node.js web client written in Node.js that excercises the AWS image recognition AI API using the rekognition service.
+The app is written in Node.js and uses the Amazon Rekognition AI service to perform the image recognition and analysis. 
+
 See https://aws.amazon.com/rekognition/ for details
 
+## Functionality
+- upload image
+- get textual description (labels) for image
+- extract text and words from image 
+- get face details including sentiment analysis (happy, sad, calm, etc.)
+
 ## Screenshots
+![Alt text](/screenshots/labels.png?raw=true)
+![Alt text](/screenshots/text.png?raw=true)
+![Alt text](/screenshots/face.png?raw=true)
 
-![Alt text](/screenshots/rekog4.png?raw=true)
-![Alt text](/screenshots/rekog5.png?raw=true)
-![Alt text](/screenshots/rekog1.png?raw=true)
-
-## Contents:
-
-- app.js = main app & webserver. Launch this.
-- /config = example aws creds config file and example endpoint override (optional) config file
-- /public = stylesheet
+## Repo Contents
+- /config = example aws creds config file
+- /controllers = UI http controller and rekognition API functionality 
 - /images = sample images (put your own images into this directory)
 - /models = ui data model
-- /views = main index.ejs and UI partials
-- /controllers = HTTP routes and rekognition API functionality
-- /screenshots - app screenshots for readme
+- /public = stylesheet, favorite icon, ui assets
+- /screenshots - screenshot images for this readme
+- /views = UI ejs components, assets and partials
 
-## Rekog Functionality:
+## Todo
+- add video recognition functionality
+- add functionality to capture screenshots from webcam
+- batch recognition and classification
+- continuous (image recognition from webcam (polling) 
+- text to speech
+- hardware recognition prototype?
 
-- Upload photo, and run it through AWS rekognition service to get back:
-  -- text labels (description)
-  -- text from image (OCR)
-  -- facial details including sentiment analysis (happy, sad, calm, etc.)
+## Images to be analysed
+put them in the /images directory
 
-### Todo:
-
-- [ ] include video recognition
-- [ ] add functionality for webcam screenshots
-- [ ] batch recognition and classification
-- [ ] continuous image recognition from webcam
-- [ ] text to speech
+images must be under 5mb and in either .jpg or .png format
 
 ## Installation overview
 
 #### 1. Install Node.js
+get it from https://nodejs.org/en/
 
-https://nodejs.org/en/
-
-#### 2. Clone the repo
-
+#### 2. Clone this repository
 ```
 git clone https://github.com/ajyounguk/img-rekog
 ```
 
 #### 3. Install project modules/dependencies
-
 ```
 cd img-rekog
 npm install
 ```
 
 #### 4. Create AWS credentials and add them to the configuration file in the /config directory
-
-- You will need a AWS IAM user configured with AmazonRekognitionFullAccess permissions
-- **please take care and don't commit your creds back to git if you clone this repo**
-
+You will need a AWS IAM user configured with AmazonRekognitionFullAccess permissions
+**please take care and don't commit your creds back to git if you clone this repo**
 ```
 cd config
 cp aws-config-sample.json aws-config.json
 ```
-
-- edit the aws-config.jon file and add your IAM Access key (for example, AKIAIOSFODNN7EXAMPLE) and the secret access key into the config file
-
-## Images to be analysed
-
-- put them in the /images directory
-- they must be under 5mb in .jpg or .png format
+edit the aws-config.json file and add your IAM access key (for example, AKIAIOSFODNN7EXAMPLE), the secret access key and your aws account region into the config file
 
 ## How to run it
-
-- run the webserver:
-
+run the webserver:
 ```
 node app.js
 ```
 
-- point your browser at the local/remoteIP port 3000 to load the HTML form
-  e.g http://127.0.0.1:3000/
+## How to access the app
+point your browser at the local/remoteIP port 3000 to load the HTML form
+
+e.g http://127.0.0.1:3000/
