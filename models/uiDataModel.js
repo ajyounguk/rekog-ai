@@ -13,7 +13,7 @@ var EndDate = new Date(thisYear, thisMonth + 1, 2).toISOString().split('T')[0]
 var ui = {
     debugui: false,  // debug ui partial at the bottom of the screen
     debuginfo: true, // info messages in console.log
-    supressUi: true,  // supress some of the ui elements
+    supressUi: false,  // supress some of the ui elements
     flow: {
         activateDiv: null,
         activateButton: null,
