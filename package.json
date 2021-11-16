@@ -4,7 +4,7 @@
   "description": "image recognition using aws rekog service",
   "main": "app.js",
   "dependencies": {
-    "aws-sdk": "^2.485.0",
+    "aws-sdk": "^2.814.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1"
   },
