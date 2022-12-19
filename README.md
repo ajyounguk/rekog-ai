@@ -64,6 +64,7 @@ cd config
 cp aws-config-sample.json aws-config.json
 ```
 edit the aws-config.json file and add your IAM access key (for example, AKIAIOSFODNN7EXAMPLE), the secret access key and your aws account region into the config file
+
 IAM policy requires access to 'rekognition' APIs - e.g. arn:aws:iam::aws:policy/AmazonRekognitionFullAccess
 
 ## How to run it
