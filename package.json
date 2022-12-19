@@ -4,11 +4,10 @@
   "description": "image recognition using aws rekog service",
   "main": "app.js",
   "dependencies": {
-    "aws-sdk": "^2.814.0",
-    "ejs": "^2.6.2",
-    "express": "^4.17.1"
+    "aws-sdk": "^2.1276.0",
+    "ejs": "^2.7.4",
+    "express": "^4.18.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
