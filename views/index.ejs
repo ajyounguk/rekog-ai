@@ -9,41 +9,40 @@
 
 <body class="simple-style" onLoad="activateUI('<%= ui.flow.activateDiv %>','<%= ui.flow.activateButton %>')">
 
-
-    <% include ./partials/title-bar.ejs %>
+    <%- include('partials/title-bar.ejs'); %>
 
     <div class="padded">
         <!-- Form Partials -->
 
-        <% include ./partials/file-picker.ejs %>
+        <%- include('partials/file-picker.ejs'); %>
         <br>
         <hr>
-
 
         </td>
         <table width="100%">
             <tr>
                 <td width='40%'>
-                    <% include ./partials/image-display.ejs %>
+                    <%- include('partials/image-display.ejs'); %>
                 </td>
                 <td width='60%>'>
-                    <% include ./partials/result-buttons.ejs %>
-                    <% include ./partials/label-result.ejs %>
-                    <% include ./partials/text-result.ejs %>
-                    <% include ./partials/face-result.ejs %>
+                    <%- include('partials/result-buttons.ejs'); %>
+                    <%- include('partials/label-result.ejs'); %>
+                    <%- include('partials/label-result.ejs') %>
+                    <%- include('partials/text-result.ejs') %>
+                    <%- include('partials/face-result.ejs') %>                
                 </td>
             </tr>
         </table>
 
 
-        <% include ./partials/debug.ejs %>
+        <%- include('partials/debug.ejs'); %>
     </div>
 
 </body>
 
 </html>
 
-<% include ./partials/ui-scripts.ejs %>
+<%- include('partials/ui-scripts.ejs'); %>
 
 </body>
 
