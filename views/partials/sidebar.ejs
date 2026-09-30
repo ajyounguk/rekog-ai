@@ -1,0 +1,60 @@
+<aside class="sidebar">
+    <div class="brand">
+        <img src="/assets/rekog.png" alt="" width="40" height="40">
+        <div>
+            <strong>Rekog AI</strong>
+            <span>Amazon Rekognition</span>
+        </div>
+    </div>
+
+    <div class="env env-<%= environment.kind %>" title="<%= environment.endpoint || 'AWS public endpoints' %>">
+        <span class="env-dot" aria-hidden="true"></span>
+        <span class="env-name"><%= environment.label %></span>
+        <span class="env-region"><%= environment.region || 'region not set' %></span>
+    </div>
+
+    <% if (result && !result.error) { %>
+        <nav class="nav" aria-label="Results">
+            <a href="#summary">Image</a>
+            <% for (const call of result.calls) { %>
+                <a href="#<%= call.key %>" class="<%= call.ok ? '' : 'nav-error' %>">
+                    <%= { labels: 'Labels', text: 'Text', faces: 'Faces' }[call.key] %>
+                    <span class="count"><%= call.ok ? (call.key === 'text' ? call.summary.lines.length : call.summary.length) : '!' %></span>
+                </a>
+            <% } %>
+            <a href="#response">Response</a>
+        </nav>
+    <% } %>
+
+    <section class="side-section">
+        <h2>Upload</h2>
+        <form method="post" action="/analyse/upload" enctype="multipart/form-data" class="upload" data-busy>
+            <input type="file" name="image" accept="image/png,image/jpeg" required>
+            <button type="submit" class="btn btn-primary">Analyse</button>
+        </form>
+        <p class="hint">PNG or JPEG, up to <%= maxImageMb %> MB. Each analysis makes 3 billable Rekognition calls.</p>
+    </section>
+
+    <section class="side-section">
+        <h2>Samples</h2>
+        <% if (samples.length === 0) { %>
+            <p class="hint">No images in the <code>images</code> folder.</p>
+        <% } %>
+        <div class="samples">
+            <% for (const name of samples) { %>
+                <form method="post" action="/analyse/sample" data-busy>
+                    <input type="hidden" name="name" value="<%= name %>">
+                    <button type="submit" class="sample<%= result && result.source.kind === 'sample' && result.source.name === name ? ' is-current' : '' %>" title="Analyse <%= name %>">
+                        <img src="/samples/<%= encodeURIComponent(name) %>" alt="" loading="lazy">
+                        <span><%= name %></span>
+                    </button>
+                </form>
+            <% } %>
+        </div>
+    </section>
+
+    <footer class="side-foot">
+        <p>Credentials: <%= environment.credentialSource || 'unknown' %></p>
+        <p>No authentication - keep it on localhost.</p>
+    </footer>
+</aside>

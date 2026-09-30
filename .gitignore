@@ -1,3 +1,7 @@
+# macOS Finder metadata
+.DS_Store
+
+# personal images kept out of the repo
 images/ay*
 images/rach*
 

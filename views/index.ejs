@@ -1,49 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="/assets/styles.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
-    <title>Rekog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rekog AI</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="icon" href="/assets/favicon.ico">
 </head>
 
-<body class="simple-style" onLoad="activateUI('<%= ui.flow.activateDiv %>','<%= ui.flow.activateButton %>')">
+<body>
+    <div class="layout">
+        <%- include('partials/sidebar') %>
 
-    <%- include('partials/title-bar.ejs'); %>
-
-    <div class="padded">
-        <!-- Form Partials -->
-
-        <%- include('partials/file-picker.ejs'); %>
-        <br>
-        <hr>
-
-        </td>
-        <table width="100%">
-            <tr>
-                <td width='40%'>
-                    <%- include('partials/image-display.ejs'); %>
-                </td>
-                <td width='60%>'>
-                    <%- include('partials/result-buttons.ejs'); %>
-                    <%- include('partials/label-result.ejs'); %>
-                    <%- include('partials/label-result.ejs') %>
-                    <%- include('partials/text-result.ejs') %>
-                    <%- include('partials/face-result.ejs') %>                
-                </td>
-            </tr>
-        </table>
-
-
-        <%- include('partials/debug.ejs'); %>
+        <main class="main">
+            <% if (!result) { %>
+                <section class="card empty">
+                    <h1>Analyse an image</h1>
+                    <p>Upload a PNG or JPEG, or pick one of the samples in the sidebar. Rekog AI sends it to
+                        Amazon Rekognition and shows the labels, text and faces it finds.</p>
+                </section>
+            <% } else { %>
+                <%- include('partials/summary') %>
+                <% if (result.error) { %>
+                    <section class="card error-card" id="error">
+                        <h2><%= result.error.name %></h2>
+                        <p><%= result.error.message %></p>
+                    </section>
+                <% } else { %>
+                    <%- include('partials/results') %>
+                <% } %>
+                <%- include('partials/response') %>
+            <% } %>
+        </main>
     </div>
-
-</body>
-
-</html>
-
-<%- include('partials/ui-scripts.ejs'); %>
-
+    <script src="/assets/app.js"></script>
 </body>
 
 </html>

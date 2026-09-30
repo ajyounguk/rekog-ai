@@ -1,0 +1,29 @@
+<section class="card summary" id="summary">
+    <div class="preview">
+        <% if (result.source.url) { %>
+            <img src="<%= result.source.url %>" alt="Analysed image">
+        <% } else { %>
+            <div class="preview-empty">No image</div>
+        <% } %>
+    </div>
+    <div class="summary-body">
+        <h1><%= result.source.name || 'No image' %></h1>
+        <p class="meta">
+            <%= result.source.kind === 'upload' ? 'Uploaded' : 'Sample' %> ·
+            <time datetime="<%= result.at %>"><%= result.at.replace('T', ' ').slice(0, 19) %> UTC</time>
+        </p>
+        <% if (result.calls.length) { %>
+            <ul class="calls">
+                <% for (const call of result.calls) { %>
+                    <li>
+                        <span class="badge <%= call.ok ? 'badge-ok' : 'badge-error' %>"><%= call.status || 'no response' %></span>
+                        <%= call.api %>
+                    </li>
+                <% } %>
+            </ul>
+        <% } %>
+        <form method="post" action="/clear">
+            <button type="submit" class="btn">Clear result</button>
+        </form>
+    </div>
+</section>
