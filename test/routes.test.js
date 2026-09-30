@@ -263,6 +263,23 @@ test('cross-site POSTs are blocked, same-origin ones allowed', async () => {
     assert.equal(same.status, 303)
 })
 
+test('same-origin form POST with "Origin: null" is allowed (what Edge/Chrome actually sent)', async () => {
+    const { app } = makeApp()
+    const res = await request(app).post('/clear').set('Origin', 'null').set('Sec-Fetch-Site', 'same-origin')
+    assert.equal(res.status, 303)
+})
+
+test('Sec-Fetch-Site same-site (another port on localhost) is blocked even with a matching-looking Origin', async () => {
+    const { app } = makeApp()
+    const res = await request(app).post('/clear').set('Host', '127.0.0.1:3000').set('Origin', 'http://127.0.0.1:3000').set('Sec-Fetch-Site', 'same-site')
+    assert.equal(res.status, 403)
+})
+
+test('referrer policy keeps the Origin header meaningful', async () => {
+    const { app } = makeApp()
+    assert.equal((await request(app).get('/')).headers['referrer-policy'], 'same-origin')
+})
+
 test('unknown routes 404', async () => {
     const { app } = makeApp()
     assert.equal((await request(app).get('/nope')).status, 404)

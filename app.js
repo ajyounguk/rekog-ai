@@ -17,15 +17,20 @@ const ENVIRONMENT_LABELS = { aws: 'AWS', local: 'Local', custom: 'Custom endpoin
 const SECURITY_HEADERS = {
     'Content-Security-Policy': "default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
     'X-Content-Type-Options': 'nosniff',
-    'Referrer-Policy': 'no-referrer'
+    // not no-referrer: under that policy browsers send "Origin: null" on same-origin form POSTs
+    'Referrer-Policy': 'same-origin'
 }
 
-// cheap CSRF guard: browsers send Origin (and Sec-Fetch-Site) on form POSTs, so reject cross-site ones.
+// cheap CSRF guard: browsers send Sec-Fetch-Site (and Origin) on form POSTs, so reject cross-site ones.
+// Sec-Fetch-Site is authoritative when present; Origin is the fallback for browsers without it.
 // requests with neither header (curl, scripts) are allowed through
 function sameOriginOnly(req, res, next) {
     if (req.method !== 'POST') return next()
     const site = req.get('sec-fetch-site')
-    if (site && site !== 'same-origin' && site !== 'none') return res.status(403).type('text').send('Cross-site request blocked')
+    if (site) {
+        if (site === 'same-origin' || site === 'none') return next()
+        return res.status(403).type('text').send('Cross-site request blocked')
+    }
     const origin = req.get('origin')
     if (origin) {
         let host = null
