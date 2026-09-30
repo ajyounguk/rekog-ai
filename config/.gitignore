@@ -1,1 +1,3 @@
+# local credentials and endpoint overrides - never commit
 aws-config.json
+aws-override.json
