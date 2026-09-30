@@ -641,8 +641,13 @@ meter::-moz-meter-bar {
         flex-wrap: wrap;
     }
 
+    /* one scrollable row so results aren't pushed far down the page */
     .samples {
-        grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: 84px;
+        overflow-x: auto;
+        padding-bottom: 0.4rem;
     }
 
     .main {
