@@ -1,0 +1,76 @@
+<% for (const call of result.calls) { %>
+    <section class="card" id="<%= call.key %>">
+        <% if (call.key === 'labels') { %>
+            <h2>Labels</h2>
+        <% } else if (call.key === 'text') { %>
+            <h2>Text</h2>
+        <% } else { %>
+            <h2>Faces</h2>
+        <% } %>
+
+        <% if (!call.ok) { %>
+            <div class="call-error">
+                <p><strong><%= call.error.name %></strong><% if (call.status) { %> (HTTP <%= call.status %>)<% } %></p>
+                <p><%= call.error.message %></p>
+                <% if (call.error.hint) { %><p class="hint"><%= call.error.hint %></p><% } %>
+            </div>
+
+        <% } else if (call.key === 'labels') { %>
+            <% if (!call.summary.length) { %>
+                <p class="hint">No labels above 60% confidence.</p>
+            <% } %>
+            <ul class="bars">
+                <% for (const label of call.summary) { %>
+                    <li>
+                        <span class="bar-name"><%= label.name %><% if (label.parents.length) { %> <small><%= label.parents.join(', ') %></small><% } %></span>
+                        <meter min="0" max="100" value="<%= label.confidence %>"></meter>
+                        <span class="bar-value"><%= formatPercent(label.confidence) %></span>
+                    </li>
+                <% } %>
+            </ul>
+
+        <% } else if (call.key === 'text') { %>
+            <% if (!call.summary.lines.length) { %>
+                <p class="hint">No text detected.</p>
+            <% } else { %>
+                <p class="hint"><%= call.summary.lines.length %> lines, <%= call.summary.wordCount %> words</p>
+                <ol class="lines">
+                    <% for (const line of call.summary.lines) { %>
+                        <li><span class="line-text"><%= line.text %></span> <span class="bar-value"><%= formatPercent(line.confidence) %></span></li>
+                    <% } %>
+                </ol>
+            <% } %>
+
+        <% } else { %>
+            <% if (!call.summary.length) { %>
+                <p class="hint">No faces detected.</p>
+            <% } %>
+            <div class="faces">
+                <% call.summary.forEach((face, i) => { %>
+                    <article class="face">
+                        <h3>Face <%= i + 1 %></h3>
+                        <dl>
+                            <% if (face.ageRange) { %><dt>Age range</dt><dd><%= face.ageRange %></dd><% } %>
+                            <% if (face.gender) { %><dt>Gender (predicted)</dt><dd><%= face.gender.value %> <small><%= formatPercent(face.gender.confidence) %></small></dd><% } %>
+                            <% for (const flag of face.flags) { %>
+                                <dt><%= flag.name %></dt><dd><%= flag.value ? 'yes' : 'no' %> <small><%= formatPercent(flag.confidence) %></small></dd>
+                            <% } %>
+                        </dl>
+                        <% if (face.emotions.length) { %>
+                            <h4>Emotions</h4>
+                            <ul class="bars bars-compact">
+                                <% for (const emotion of face.emotions.slice(0, 4)) { %>
+                                    <li>
+                                        <span class="bar-name"><%= emotion.type.toLowerCase() %></span>
+                                        <meter min="0" max="100" value="<%= emotion.confidence %>"></meter>
+                                        <span class="bar-value"><%= formatPercent(emotion.confidence) %></span>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        <% } %>
+                    </article>
+                <% }) %>
+            </div>
+        <% } %>
+    </section>
+<% } %>

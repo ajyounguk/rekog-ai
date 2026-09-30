@@ -1,0 +1,25 @@
+<%
+    const raw = {}
+    for (const call of result.calls) raw[call.api] = call.ok ? call.data : { error: call.error }
+    if (result.error) raw.error = result.error
+    const statusClass = result.ok ? 'badge-ok' : 'badge-error'
+    const statusText = result.status ? (result.ok ? result.status + ' OK' : String(result.status)) : 'No response'
+%>
+<section class="card panel" id="response">
+    <header class="panel-head">
+        <h2>Response</h2>
+        <span class="badge <%= statusClass %>"><%= statusText %></span>
+        <button type="button" class="btn btn-small" data-copy="raw-json">Copy</button>
+    </header>
+    <pre class="json" id="raw-json" data-json><%= JSON.stringify(raw, null, 2) %></pre>
+    <footer class="panel-foot">
+        <% const ids = result.calls.filter(c => c.requestId) %>
+        <% if (ids.length) { %>
+            <% for (const call of ids) { %>
+                <span><%= call.api %>: <code><%= call.requestId %></code></span>
+            <% } %>
+        <% } else { %>
+            <span>No request ID</span>
+        <% } %>
+    </footer>
+</section>
